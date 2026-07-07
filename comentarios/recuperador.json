@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "usuario": "anapaula",
+    "nome": "Ana Paula",
+    "foto": "https://i.pravatar.cc/100?img=12",
+    "comentario": "Achei que ia precisar cortar meu cabelo depois das luzes. O Recuperador salvou meus fios.",
+    "curtidas": 412,
+    "data": "2 dias",
+    "link": "https://instagram.com"
+  },
+  {
+    "id": 2,
+    "usuario": "camila",
+    "nome": "Camila",
+    "foto": "https://i.pravatar.cc/100?img=22",
+    "comentario": "Nunca mais fico sem esse produto.",
+    "curtidas": 289,
+    "data": "4 dias",
+    "link": "https://instagram.com"
+  }
+]
