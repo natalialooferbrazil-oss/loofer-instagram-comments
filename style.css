@@ -28,17 +28,18 @@ body{
 }
 
 .slider{
-    max-width:1300px;
+    max-width:1350px;
     margin:auto;
     position:relative;
+    padding:0 70px;
 }
-
 .track{
     display:flex;
-    gap:25px;
+    gap:30px;
     overflow:hidden;
+    align-items:flex-start;
+    padding:20px;
 }
-
 .track img{
     width:380px;
     border-radius:22px;
