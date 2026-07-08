@@ -1,3 +1,4 @@
+const viewport = document.querySelector(".viewport");
 const track = document.querySelector(".track");
 const imagens = document.querySelectorAll(".track img");
 
