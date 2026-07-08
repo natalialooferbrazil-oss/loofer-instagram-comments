@@ -7,7 +7,13 @@ const next = document.getElementById("next");
 let indice = 0;
 
 function larguraCard() {
-    return imagens[0].getBoundingClientRect().width + 25;
+
+    const estilo = window.getComputedStyle(track);
+
+    const gap = parseInt(estilo.columnGap || estilo.gap) || 30;
+
+    return imagens[0].getBoundingClientRect().width + gap;
+
 }
 
 function atualizar() {
