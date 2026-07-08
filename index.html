@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentários Loofer</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Comentários Loofer</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<section class="instagram">
+    <section class="container">
 
-<div class="titulo">
+        <div class="titulo">
+            <h2>💚 O que nossas clientes estão dizendo</h2>
+            <p>Comentários reais publicados no Instagram.</p>
+        </div>
 
-<h2>💚 O que nossas clientes estão dizendo</h2>
+        <div class="slider">
 
-<p>Comentários reais publicados no Instagram.</p>
+            <button class="prev" id="prev" aria-label="Anterior">
+                &#10094;
+            </button>
 
-</div>
+            <div class="viewport">
 
-<div class="slider">
+                <div class="track">
 
-<button id="prev">❮</button>
+                    <img src="prints/comentario1.png" alt="Comentário 1">
+                    <img src="prints/comentario2.png" alt="Comentário 2">
+                    <img src="prints/comentario3.png" alt="Comentário 3">
+                    <img src="prints/comentario4.png" alt="Comentário 4">
+                    <img src="prints/comentario5.png" alt="Comentário 5">
+                    <img src="prints/comentario6.png" alt="Comentário 6">
+                    <img src="prints/comentario7.png" alt="Comentário 7">
 
-<div class="track">
+                </div>
 
-<img src="prints/comentario1.png">
+            </div>
 
-<img src="prints/comentario2.png">
+            <button class="next" id="next" aria-label="Próximo">
+                &#10095;
+            </button>
 
-<img src="prints/comentario3.png">
+        </div>
 
-<img src="prints/comentario4.png">
+        <div class="dots" id="dots"></div>
 
-<img src="prints/comentario5.png">
+    </section>
 
-<img src="prints/comentario6.png">
+    <div id="overlay" class="overlay">
+        <img id="overlayImg" alt="Comentário ampliado">
+    </div>
 
-<img src="prints/comentario7.png">
-
-</div>
-
-<button id="next">❯</button>
-
-</div>
-
-</section>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
