@@ -41,6 +41,9 @@ body{
     gap:30px;
     align-items:flex-start;
     padding:20px;
+
+    overflow-x:auto;
+    scroll-behavior:smooth;
 }
 
 .track img{
