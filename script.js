@@ -7,9 +7,12 @@ const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 
 let indice = 0;
+function larguraCard(){
 
-function larguraCard() {
-    return imagens[0].getBoundingClientRect().width + 25;
+    const gap = 30;
+
+    return imagens[0].offsetWidth + gap;
+
 }
 function atualizar() {
 
