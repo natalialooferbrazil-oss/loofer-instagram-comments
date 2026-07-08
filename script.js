@@ -1,3 +1,5 @@
+console.log("Script carregou!");
+
 const track = document.querySelector(".track");
 const imagens = document.querySelectorAll(".track img");
 
