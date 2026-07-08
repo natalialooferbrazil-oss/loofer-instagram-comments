@@ -1,4 +1,3 @@
-const viewport = document.querySelector(".viewport");
 const track = document.querySelector(".track");
 const imagens = document.querySelectorAll(".track img");
 
@@ -8,86 +7,58 @@ const next = document.getElementById("next");
 let indice = 0;
 
 function larguraCard() {
-    return imagens[0].offsetWidth + 22;
+    return imagens[0].getBoundingClientRect().width + 25;
 }
 
 function atualizar() {
-    viewport.scrollTo({
+    track.scrollTo({
         left: indice * larguraCard(),
         behavior: "smooth"
     });
 }
 
-// BOTÃO DIREITA
-next.addEventListener("click", () => {
-
-    indice++;
-
-    if (indice >= imagens.length) {
-        indice = 0;
-    }
-
+next.onclick = () => {
+    if (indice < imagens.length - 1) indice++;
+    else indice = 0;
     atualizar();
+};
 
-});
-
-// BOTÃO ESQUERDA
-prev.addEventListener("click", () => {
-
-    indice--;
-
-    if (indice < 0) {
-        indice = imagens.length - 1;
-    }
-
+prev.onclick = () => {
+    if (indice > 0) indice--;
+    else indice = imagens.length - 1;
     atualizar();
+};
 
-});
-
-// AUTOPLAY
+// autoplay
 setInterval(() => {
-
-    indice++;
-
-    if (indice >= imagens.length) {
-        indice = 0;
-    }
+    if (indice < imagens.length - 1) indice++;
+    else indice = 0;
 
     atualizar();
-
 }, 4500);
 
-// SWIPE MOBILE
-
-let inicioX = 0;
+// swipe mobile
+let inicio = 0;
 
 track.addEventListener("touchstart", e => {
-    inicioX = e.touches[0].clientX;
+    inicio = e.touches[0].clientX;
 });
 
 track.addEventListener("touchend", e => {
 
-    const fimX = e.changedTouches[0].clientX;
+    const fim = e.changedTouches[0].clientX;
 
-    if (inicioX - fimX > 50){
+    if (inicio - fim > 50) {
 
-        indice++;
-
-        if(indice >= imagens.length){
-            indice = 0;
-        }
+        if (indice < imagens.length - 1) indice++;
 
         atualizar();
 
     }
 
-    if(fimX - inicioX > 50){
+    if (fim - inicio > 50) {
 
-        indice--;
-
-        if(indice < 0){
-            indice = imagens.length - 1;
-        }
+        if (indice > 0) indice--;
 
         atualizar();
 
@@ -95,43 +66,38 @@ track.addEventListener("touchend", e => {
 
 });
 
-// AMPLIAR IMAGEM
+// ampliar imagem
+imagens.forEach(img=>{
 
-imagens.forEach(img => {
+img.onclick=()=>{
 
-    img.addEventListener("click", ()=>{
+const fundo=document.createElement("div");
 
-        const fundo = document.createElement("div");
+fundo.style.position="fixed";
+fundo.style.left=0;
+fundo.style.top=0;
+fundo.style.width="100%";
+fundo.style.height="100%";
+fundo.style.background="rgba(0,0,0,.9)";
+fundo.style.display="flex";
+fundo.style.alignItems="center";
+fundo.style.justifyContent="center";
+fundo.style.zIndex="999999";
 
-        fundo.style.position="fixed";
-        fundo.style.left="0";
-        fundo.style.top="0";
-        fundo.style.width="100%";
-        fundo.style.height="100%";
-        fundo.style.background="rgba(0,0,0,.88)";
-        fundo.style.display="flex";
-        fundo.style.alignItems="center";
-        fundo.style.justifyContent="center";
-        fundo.style.zIndex="999999";
+const foto=document.createElement("img");
 
-        const foto = document.createElement("img");
+foto.src=img.src;
+foto.style.maxWidth="95%";
+foto.style.maxHeight="95%";
+foto.style.borderRadius="18px";
+foto.style.boxShadow="0 20px 60px rgba(0,0,0,.5)";
 
-        foto.src = img.src;
-        foto.style.maxWidth="95%";
-        foto.style.maxHeight="95%";
-        foto.style.borderRadius="20px";
-        foto.style.boxShadow="0 30px 80px rgba(0,0,0,.5)";
+fundo.appendChild(foto);
 
-        fundo.appendChild(foto);
+document.body.appendChild(fundo);
 
-        fundo.addEventListener("click",()=>{
+fundo.onclick=()=>fundo.remove();
 
-            fundo.remove();
-
-        });
-
-        document.body.appendChild(fundo);
-
-    });
+}
 
 });
