@@ -1,27 +1,57 @@
-<section class="instagram-comments">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <div class="titulo">
-        💚 O que nossas clientes estão dizendo
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="slider">
+    <link rel="stylesheet" href="style.css">
 
-        <button class="prev">‹</button>
+    <title>Comentários Instagram</title>
+</head>
 
-        <div class="viewport">
+<body>
 
-            <div class="track">
+    <section class="reviews">
 
-                <!-- imagens -->
+        <h2>💚 O que nossas clientes estão dizendo</h2>
+
+        <p>Comentários reais publicados no Instagram.</p>
+
+        <div class="carousel">
+
+            <button id="prev">❮</button>
+
+            <div class="viewport">
+
+                <div class="track" id="track">
+
+                    <img src="prints/comentario1.png" alt="Comentário 1">
+                    <img src="prints/comentario2.png" alt="Comentário 2">
+                    <img src="prints/comentario3.png" alt="Comentário 3">
+                    <img src="prints/comentario4.png" alt="Comentário 4">
+                    <img src="prints/comentario5.png" alt="Comentário 5">
+                    <img src="prints/comentario6.png" alt="Comentário 6">
+                    <img src="prints/comentario7.png" alt="Comentário 7">
+
+                </div>
 
             </div>
 
+            <button id="next">❯</button>
+
         </div>
 
-        <button class="next">›</button>
+        <div id="dots"></div>
 
+    </section>
+
+    <div id="overlay">
+        <img id="overlayImg" alt="Comentário ampliado">
     </div>
 
-    <div class="dots"></div>
+    <script src="script.js"></script>
 
-</section>
+</body>
+
+</html>
