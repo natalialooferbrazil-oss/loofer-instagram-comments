@@ -34,14 +34,14 @@ body{
     max-width:1350px;
     margin:auto;
     position:relative;
-    padding:0 70px;
+    padding:0 90px;
 }
 .track{
     display:flex;
     gap:30px;
     overflow:hidden;
     align-items:flex-start;
-    padding:20px;
+    padding:20px 10px;
 }
 .track img{
     width:380px;
@@ -73,13 +73,12 @@ button{
 }
 
 .prev{
-    left:-25px;
+    left:10px;
 }
 
 .next{
-    right:-25px;
+    right:10px;
 }
-
 button:hover{
     transform:translateY(-50%) scale(1.08);
 }
