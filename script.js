@@ -7,7 +7,7 @@ const next = document.getElementById("next");
 let indice = 0;
 
 function larguraCard() {
-    return imagens[0].getBoundingClientRect().width + 25;
+    return imagens[0].offsetWidth + 22;
 }
 
 function atualizar() {
@@ -17,48 +17,76 @@ function atualizar() {
     });
 }
 
-next.onclick = () => {
-    if (indice < imagens.length - 1) indice++;
-    else indice = 0;
-    atualizar();
-};
+// BOTÃO DIREITA
+next.addEventListener("click", () => {
 
-prev.onclick = () => {
-    if (indice > 0) indice--;
-    else indice = imagens.length - 1;
-    atualizar();
-};
+    indice++;
 
-// autoplay
+    if (indice >= imagens.length) {
+        indice = 0;
+    }
+
+    atualizar();
+
+});
+
+// BOTÃO ESQUERDA
+prev.addEventListener("click", () => {
+
+    indice--;
+
+    if (indice < 0) {
+        indice = imagens.length - 1;
+    }
+
+    atualizar();
+
+});
+
+// AUTOPLAY
 setInterval(() => {
-    if (indice < imagens.length - 1) indice++;
-    else indice = 0;
+
+    indice++;
+
+    if (indice >= imagens.length) {
+        indice = 0;
+    }
 
     atualizar();
+
 }, 4500);
 
-// swipe mobile
-let inicio = 0;
+// SWIPE MOBILE
+
+let inicioX = 0;
 
 track.addEventListener("touchstart", e => {
-    inicio = e.touches[0].clientX;
+    inicioX = e.touches[0].clientX;
 });
 
 track.addEventListener("touchend", e => {
 
-    const fim = e.changedTouches[0].clientX;
+    const fimX = e.changedTouches[0].clientX;
 
-    if (inicio - fim > 50) {
+    if (inicioX - fimX > 50){
 
-        if (indice < imagens.length - 1) indice++;
+        indice++;
+
+        if(indice >= imagens.length){
+            indice = 0;
+        }
 
         atualizar();
 
     }
 
-    if (fim - inicio > 50) {
+    if(fimX - inicioX > 50){
 
-        if (indice > 0) indice--;
+        indice--;
+
+        if(indice < 0){
+            indice = imagens.length - 1;
+        }
 
         atualizar();
 
@@ -66,38 +94,43 @@ track.addEventListener("touchend", e => {
 
 });
 
-// ampliar imagem
-imagens.forEach(img=>{
+// AMPLIAR IMAGEM
 
-img.onclick=()=>{
+imagens.forEach(img => {
 
-const fundo=document.createElement("div");
+    img.addEventListener("click", ()=>{
 
-fundo.style.position="fixed";
-fundo.style.left=0;
-fundo.style.top=0;
-fundo.style.width="100%";
-fundo.style.height="100%";
-fundo.style.background="rgba(0,0,0,.9)";
-fundo.style.display="flex";
-fundo.style.alignItems="center";
-fundo.style.justifyContent="center";
-fundo.style.zIndex="999999";
+        const fundo = document.createElement("div");
 
-const foto=document.createElement("img");
+        fundo.style.position="fixed";
+        fundo.style.left="0";
+        fundo.style.top="0";
+        fundo.style.width="100%";
+        fundo.style.height="100%";
+        fundo.style.background="rgba(0,0,0,.88)";
+        fundo.style.display="flex";
+        fundo.style.alignItems="center";
+        fundo.style.justifyContent="center";
+        fundo.style.zIndex="999999";
 
-foto.src=img.src;
-foto.style.maxWidth="95%";
-foto.style.maxHeight="95%";
-foto.style.borderRadius="18px";
-foto.style.boxShadow="0 20px 60px rgba(0,0,0,.5)";
+        const foto = document.createElement("img");
 
-fundo.appendChild(foto);
+        foto.src = img.src;
+        foto.style.maxWidth="95%";
+        foto.style.maxHeight="95%";
+        foto.style.borderRadius="20px";
+        foto.style.boxShadow="0 30px 80px rgba(0,0,0,.5)";
 
-document.body.appendChild(fundo);
+        fundo.appendChild(foto);
 
-fundo.onclick=()=>fundo.remove();
+        fundo.addEventListener("click",()=>{
 
-}
+            fundo.remove();
+
+        });
+
+        document.body.appendChild(fundo);
+
+    });
 
 });
