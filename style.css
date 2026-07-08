@@ -45,6 +45,13 @@ body{
     overflow-x:auto;
     scroll-behavior:smooth;
 }
+.track::-webkit-scrollbar{
+    display:none;
+}
+
+.track{
+    scrollbar-width:none;
+}
 
 .track img{
     width:380px;
