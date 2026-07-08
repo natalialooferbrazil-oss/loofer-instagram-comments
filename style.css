@@ -36,6 +36,19 @@ body{
     position:relative;
     padding:0 70px;
 }
+.viewport{
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-behavior:smooth;
+    flex:1;
+
+    /* esconde a barra */
+    scrollbar-width:none;
+}
+
+.viewport::-webkit-scrollbar{
+    display:none;
+}
 .track{
     display:flex;
     gap:22px;
