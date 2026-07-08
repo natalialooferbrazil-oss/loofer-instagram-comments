@@ -72,11 +72,11 @@ button{
     z-index:10;
 }
 
-.prev{
+#prev{
     left:-25px;
 }
 
-.next{
+#next{
     right:-25px;
 }
 
