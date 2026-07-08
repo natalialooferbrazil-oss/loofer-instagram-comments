@@ -1,191 +1,103 @@
 const track = document.querySelector(".track");
-const cards = document.querySelectorAll(".track img");
+const imagens = document.querySelectorAll(".track img");
 
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 
-const overlay = document.getElementById("overlay");
-const overlayImg = document.getElementById("overlayImg");
-const dotsContainer = document.getElementById("dots");
-
 let indice = 0;
-let autoplay;
 
-// Quantos cards aparecem na tela
-function cardsVisiveis() {
-    return window.innerWidth <= 768 ? 1 : 3;
-}
-
-// Largura de um card + gap
 function larguraCard() {
-    const estilo = getComputedStyle(track);
-    const gap = parseInt(estilo.gap) || 24;
-    return cards[0].offsetWidth + gap;
+    return imagens[0].getBoundingClientRect().width + 25;
 }
 
-// Cria bolinhas
-function criarDots() {
-
-    dotsContainer.innerHTML = "";
-
-    const total = cards.length - cardsVisiveis() + 1;
-
-    for (let i = 0; i < total; i++) {
-
-        const dot = document.createElement("span");
-
-        if (i === indice)
-            dot.classList.add("active");
-
-        dot.onclick = () => {
-
-            indice = i;
-
-            atualizar();
-
-            reiniciarAutoPlay();
-
-        }
-
-        dotsContainer.appendChild(dot);
-
-    }
-
-}
-
-// Atualiza posição
 function atualizar() {
-
-    track.style.transform =
-        `translateX(-${indice * larguraCard()}px)`;
-
-    [...dotsContainer.children].forEach((d, i) => {
-
-        d.classList.toggle("active", i === indice);
-
+    track.scrollTo({
+        left: indice * larguraCard(),
+        behavior: "smooth"
     });
-
-}
-
-// Próximo
-function proximo() {
-
-    indice++;
-
-    const limite = cards.length - cardsVisiveis();
-
-    if (indice > limite)
-        indice = 0;
-
-    atualizar();
-
-}
-
-// Anterior
-function anterior() {
-
-    indice--;
-
-    const limite = cards.length - cardsVisiveis();
-
-    if (indice < 0)
-        indice = limite;
-
-    atualizar();
-
 }
 
 next.onclick = () => {
-
-    proximo();
-
-    reiniciarAutoPlay();
-
-}
+    if (indice < imagens.length - 1) indice++;
+    else indice = 0;
+    atualizar();
+};
 
 prev.onclick = () => {
+    if (indice > 0) indice--;
+    else indice = imagens.length - 1;
+    atualizar();
+};
 
-    anterior();
+// autoplay
+setInterval(() => {
+    if (indice < imagens.length - 1) indice++;
+    else indice = 0;
 
-    reiniciarAutoPlay();
+    atualizar();
+}, 4500);
 
-}
-
-// AutoPlay
-
-function iniciarAutoPlay() {
-
-    autoplay = setInterval(proximo, 4500);
-
-}
-
-function reiniciarAutoPlay() {
-
-    clearInterval(autoplay);
-
-    iniciarAutoPlay();
-
-}
-
-// Swipe
-
+// swipe mobile
 let inicio = 0;
 
 track.addEventListener("touchstart", e => {
-
     inicio = e.touches[0].clientX;
-
 });
 
 track.addEventListener("touchend", e => {
 
     const fim = e.changedTouches[0].clientX;
 
-    if (inicio - fim > 50)
-        proximo();
+    if (inicio - fim > 50) {
 
-    if (fim - inicio > 50)
-        anterior();
+        if (indice < imagens.length - 1) indice++;
 
-});
+        atualizar();
 
-// Modal
+    }
 
-cards.forEach(card => {
+    if (fim - inicio > 50) {
 
-    card.onclick = () => {
+        if (indice > 0) indice--;
 
-        overlay.style.display = "flex";
-
-        overlayImg.src = card.src;
+        atualizar();
 
     }
 
 });
 
-overlay.onclick = () => {
+// ampliar imagem
+imagens.forEach(img=>{
 
-    overlay.style.display = "none";
+img.onclick=()=>{
+
+const fundo=document.createElement("div");
+
+fundo.style.position="fixed";
+fundo.style.left=0;
+fundo.style.top=0;
+fundo.style.width="100%";
+fundo.style.height="100%";
+fundo.style.background="rgba(0,0,0,.9)";
+fundo.style.display="flex";
+fundo.style.alignItems="center";
+fundo.style.justifyContent="center";
+fundo.style.zIndex="999999";
+
+const foto=document.createElement("img");
+
+foto.src=img.src;
+foto.style.maxWidth="95%";
+foto.style.maxHeight="95%";
+foto.style.borderRadius="18px";
+foto.style.boxShadow="0 20px 60px rgba(0,0,0,.5)";
+
+fundo.appendChild(foto);
+
+document.body.appendChild(fundo);
+
+fundo.onclick=()=>fundo.remove();
 
 }
 
-// Responsivo
-
-window.addEventListener("resize", () => {
-
-    if (indice > cards.length - cardsVisiveis())
-        indice = 0;
-
-    criarDots();
-
-    atualizar();
-
 });
-
-// Inicialização
-
-criarDots();
-
-atualizar();
-
-iniciarAutoPlay();
