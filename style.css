@@ -42,8 +42,7 @@ body{
     align-items:flex-start;
     padding:20px;
 
-    overflow-x:auto;
-    scroll-behavior:smooth;
+    transition:transform .45s ease;
 }
 .track::-webkit-scrollbar{
     display:none;
