@@ -11,12 +11,13 @@ let indice = 0;
 function larguraCard() {
     return imagens[0].getBoundingClientRect().width + 25;
 }
-
 function atualizar() {
-    track.scrollTo({
-        left: indice * larguraCard(),
-        behavior: "smooth"
-    });
+
+    const largura = larguraCard();
+
+    track.style.transform =
+        `translateX(-${indice * largura}px)`;
+
 }
 
 next.onclick = () => {
