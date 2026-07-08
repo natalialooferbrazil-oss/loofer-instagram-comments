@@ -12,7 +12,7 @@ function larguraCard() {
 }
 
 function atualizar() {
-    track.scrollTo({
+    viewport.scrollTo({
         left: indice * larguraCard(),
         behavior: "smooth"
     });
